@@ -8,6 +8,7 @@ import shutil
 import requests
 import tarfile
 import urllib3
+from pprint import pprint
 urllib3.disable_warnings()
 
 if len(sys.argv) != 2 :
@@ -84,6 +85,7 @@ if (resp.status_code != 200):
 				sys.stdout.write('{}: {}, '.format(key, value))
 			print('digest: {}'.format(manifest["digest"]))
 	exit(1)
+pprint(resp.json())
 layers = resp.json()['layers']
 
 # Create tmp folder that will hold the image
