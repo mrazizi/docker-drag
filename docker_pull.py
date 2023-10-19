@@ -86,7 +86,12 @@ if (resp.status_code != 200):
 			print('digest: {}'.format(manifest["digest"]))
 	exit(1)
 pprint(resp.json())
-layers = resp.json()['layers']
+try:
+	print("using layers")
+	layers = resp.json()['layers']
+except:
+	print("using manifests")
+	layers = resp.json()["manifests"]
 
 # Create tmp folder that will hold the image
 imgdir = 'tmp_{}_{}'.format(img, tag.replace(':', '@'))
